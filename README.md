@@ -34,7 +34,7 @@ You can use this URL in your Looker instance during development.
 
 1. Navigate to your github account. `https://github.com/YOUR_USERNAME`
 2. Click **New**
-3. In *Repositoy Name*, Enter `YOUR_USERNAME.github.io`. (ex. bytecodeio.gihub.io)
+3. In *Repositoy Name*, Enter `YOUR_USERNAME.github.io`. (ex. bytecodeio.github.io)
 4. Enter a description.
 5. Check box on *Initialize this repository with a README*.
 6. Click **Create Repository**
