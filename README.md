@@ -40,6 +40,6 @@ You can use this URL in your Looker instance during development.
 6. Click **Create Repository**
 7. Upload `treemap.js` to this repository and commit.
 
-Your custom visulization is now hosted on github. `https://YOUR_USERNAME.github.io/treemap.js`
+Your custom visualization is now hosted on github. `https://YOUR_USERNAME.github.io/treemap.js`
 
 You can use this URL in your Looker instance for production.
