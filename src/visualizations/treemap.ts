@@ -19,13 +19,13 @@ var wholepop,hoverpop,poparrow,toparrow;
 
 function popMove(evt) {
 	if (wholepop != undefined) {
-		
+
 		var poptop,popleft;
 		var viswidth = document.getElementById('vis').offsetWidth;
-		
+
 		poptop = evt.clientY - 130;
 		popleft = evt.clientX - 78;
-		
+
 		if (popleft < 0) {popleft = 0};
 		if ((popleft + 173) > viswidth) {
 			popleft = viswidth - 173;
@@ -38,7 +38,7 @@ function popMove(evt) {
 			toparrow.style.display = 'none';
 			poparrow.style.display = 'block';
 		}
-		
+
 		wholepop.style.top  = (poptop).toString() + 'px';
 		wholepop.style.left  = (popleft).toString() + 'px';
 	}
@@ -108,7 +108,7 @@ const vis: TreemapVisualization = {
   // Set up the initial state of the visualization
   create: function (element, config) {
     this.svg = d3.select(element).append('svg');
-	
+
 	wholepop = document.createElement('div');
 	wholepop.className = 'treemap_whole_pop';
 	hoverpop = document.createElement('div');
@@ -117,11 +117,11 @@ const vis: TreemapVisualization = {
 	poparrow.className = 'treemap_pop_arrow';
 	toparrow = document.createElement('div');
 	toparrow.className = 'treemap_top_arrow';
-	
+
 	wholepop.appendChild(toparrow);
 	wholepop.appendChild(hoverpop);
 	wholepop.appendChild(poparrow);
-	
+
 	//console.log(window.parent);
 	element.appendChild(wholepop);
   },
@@ -140,9 +140,9 @@ const vis: TreemapVisualization = {
     const measure = queryResponse.fields.measure_like[0]
 
     const format = formatType(measure.value_format) || ((s: any): string => s.toString())
-	
+
 	if (config.color_range == undefined) {config.color_range = ["#5245ed", "#ed6168", "#1ea8df", "#353b49", "#49cec1", "#b3a0dd", "#db7f2a", "#706080", "#a2dcf3", "#776fdf", "#e9b404", "#635189"];}
-	
+
     const colorScale: d3.ScaleOrdinal<string, null> = d3.scaleOrdinal()
     const color = colorScale.range(config.color_range)
 
@@ -183,32 +183,32 @@ const vis: TreemapVisualization = {
       .style('cursor', 'pointer')
 	  .on('click', function (this: any, d: Cell) {
 		const coords = d3.mouse(this);
-		
+
 		const xOffset = parseInt(this.getAttribute('transform').split(',')[0].replace('translate(',''));
 		const yOffset = parseInt(this.getAttribute('transform').split(',')[1].replace(')',''));
 		const event: object = { pageX: coords[0] + xOffset, pageY: coords[1] +yOffset }
-		
-		if (d.data.data[dimensions[0].name].hasOwnProperty('links')) {		
+
+		if (d.data.data[dimensions[0].name].hasOwnProperty('links')) {
 			d.data.data[dimensions[0].name].links.forEach((link) => {
 				link.url = link.url + '&vis_config=' + encodeURIComponent(JSON.stringify({type:'treemap_jt'}));
 			})
 		}
-		
+
 		LookerCharts.Utils.openDrillMenu({
 			links: d.data.data[dimensions[0].name].links,
 			event: event
 		});
-		
+
 	  })
       .on('mouseenter', (d: any) => {
         const ancestors = d.ancestors()
-		
+
 		hoverpop.innerHTML = ancestors.map((p: any) => p.data.name)
             .slice(0, -1)
             .reverse()
             .join('-') + ': ' + format(d.value);
 		wholepop.style.display = 'block';
-	
+
         svg.selectAll('g.node rect')
           .style('stroke', null)
           .filter((p: any) => ancestors.indexOf(p) > -1)
@@ -236,7 +236,7 @@ const vis: TreemapVisualization = {
           .range(colors)
         return scale(d.depth)
       })
-	  
+
 
     cell.append('clipPath')
       .attr('id', (d, i) => 'clip-' + i)
